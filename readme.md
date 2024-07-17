@@ -41,3 +41,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
 
 npm install axios jwt-decode react-router-dom , installed these packages in frontend.
+
+Watching a tutorial to implement authentication and autherisation in my project.
+https://www.youtube.com/watch?v=c-QsfbznSXI
+Github mentioned in the video : https://github.com/techwithtim/Django-React-Full-Stack-App
+
