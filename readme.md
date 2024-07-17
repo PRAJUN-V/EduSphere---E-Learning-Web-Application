@@ -61,6 +61,17 @@ user view is created inside views.py accounts.
 
 added url patterns for authentication in urls.py in settings.
 
+Backend part for authentication is completed now I need to look frontend.
+
+Now I am going to install tailwind in react
+
+.env file is added in edusphere project folder to put secret api keys and other keys at frontend.
+
+we created api.js and constants.js file.
+
+
+
+
 
 
 
