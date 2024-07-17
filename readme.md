@@ -46,3 +46,29 @@ Watching a tutorial to implement authentication and autherisation in my project.
 https://www.youtube.com/watch?v=c-QsfbznSXI
 Github mentioned in the video : https://github.com/techwithtim/Django-React-Full-Stack-App
 
+I have added a requirements.txt file mentioned in the video and installed all the pip package in it.
+pip install -r requirements.txt
+
+In the video the app name is "api" but in my case I am using "accounts" as my app name.
+
+Making changes in settings.py file
+
+created a file named serializers.py in accounts app.
+Serializer convert python object to json data and vice versa.
+
+
+user view is created inside views.py accounts.
+
+added url patterns for authentication in urls.py in settings.
+
+
+
+
+
+
+
+
+
+
+
+
