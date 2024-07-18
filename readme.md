@@ -84,3 +84,10 @@ Now I am going to manage category add by admin.
 
 Role based protected route is almost completed.
 
+Admin Password changed,
+Prajun#321
+
+Now I am going to do admin approval for tutor.
+
+now my profile id and user id are same to make it easy. It is implemented using signals.
+

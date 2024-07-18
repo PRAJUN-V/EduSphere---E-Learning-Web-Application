@@ -25,6 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
             Profile.objects.update_or_create(user=user, defaults=profile_data)
         return user
 
+# for passing different variables in payload of token.
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
