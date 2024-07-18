@@ -85,7 +85,7 @@ Now I am going to manage category add by admin.
 Role based protected route is almost completed.
 
 Admin Password changed,
-Prajun#321
+Prajun@123
 
 Now I am going to do admin approval for tutor.
 
