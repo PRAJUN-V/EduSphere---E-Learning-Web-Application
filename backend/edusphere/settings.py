@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'accounts',
     'corsheaders',
     "rest_framework",
+    "admin_api",
+
 ]
 
 MIDDLEWARE = [
@@ -149,3 +151,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # This allows all the origin, later during deployment you can change it from more security.
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

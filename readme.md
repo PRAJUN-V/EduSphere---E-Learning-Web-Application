@@ -69,17 +69,18 @@ Now I am going to install tailwind in react
 
 we created api.js and constants.js file.
 
+I am creating a model named Profile in accounts model to extend the field of User model
 
+I have created a signal that will create profile related to user at the time of user creation itself.
 
+Media folder is setuped to store profile image in django side. It is best to store images in backend side
+because at time of deployment we can easily connect it with aws s3 bucket.
 
+npm install react-toastify , to include toaster in react
 
+authentication is partially completed.
 
+Now I am going to manage category add by admin.
 
-
-
-
-
-
-
-
+Role based protected route is almost completed.
 

@@ -1,10 +1,11 @@
 import react from "react"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import { Login } from "./pages/Login"
-import { Register } from "./pages/Register"
-import { NotFound } from "./pages/NotFound"
-import { Home } from "./pages/Home"
 import ProtectedRoute from "./components/ProtectedRoute"
+import {Login} from './pages/authentication/Login'
+import {Register} from './pages/authentication/Register'
+import { NotFound } from "./pages/pageNotFound/NotFound"
+import { Home } from "./pages/user/Home"
+import { useDispatch } from "react-redux";
 
 function Logout() {
   localStorage.clear()
@@ -20,14 +21,21 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
+
+        {/* <Route
           path="/"
           element={
             <ProtectedRoute>
               <Home />
             </ProtectedRoute>
           }
-        />
+        /> */}
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={
+          <ProtectedRoute requiredRole="student">
+            <Home />
+          </ProtectedRoute>
+        } />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />
