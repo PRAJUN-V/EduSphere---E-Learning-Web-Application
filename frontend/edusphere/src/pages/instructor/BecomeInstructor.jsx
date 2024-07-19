@@ -20,7 +20,7 @@ export const BecomeInstructor = () => {
         // dispatch(setAuthenticated(false)); // Dispatch action to update isAuthenticated
         navigate('/logout');
     };
-    
+
     return (
         <>
             <div>
@@ -75,11 +75,12 @@ export const BecomeInstructor = () => {
                                 </div>
                             </div>
                         </div>
-                        <Footer />
+
                     </>
                 ) : (
                     <BecomeInstructorForm />
                 )}
+                <Footer />
             </div>
         </>
     )

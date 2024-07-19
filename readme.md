@@ -91,3 +91,12 @@ Now I am going to do admin approval for tutor.
 
 now my profile id and user id are same to make it easy. It is implemented using signals.
 
+use patch method instead of put if you need to update the model data partially otherwise it will show 
+400 bad request error.
+
+Now I didn't added categroy in the tutor approval side I need to do it after category is done in
+admin side.
+
+Now I am going to complete otp on registration side.
+
+Instructor application list in admin side is partially completed I need to implement action in it.

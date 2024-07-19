@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/Logo.png';
-import { Home, List, Layers, Users, Book, LogOut } from 'react-feather'; // Import icons from Feather Icons
+import { Home, List, Layers, Users, Book, LogOut } from 'react-feather';
 
 export const SideBar = () => {
     return (
-        <div className="bg-blue-500 text-white h-screen w-64">
+        <div className="bg-blue-500 text-white h-screen w-64 flex flex-col">
             {/* Logo and Name */}
-            <div className="flex items-center justify-center p-0">
+            <div className="flex items-center justify-center p-4">
                 <img src={logo} alt="Logo" className="h-20 mr-2" />
                 <span className="text-xl font-bold">EduSphere</span>
             </div>
@@ -22,7 +22,7 @@ export const SideBar = () => {
             <div className="border-t border-white my-2"></div>
 
             {/* Navigation Links */}
-            <nav>
+            <nav className="flex-grow">
                 <ul className="space-y-2">
                     <li>
                         <Link to="/admin/dashboard" className="block py-2 px-4 hover:bg-blue-600">
@@ -35,7 +35,7 @@ export const SideBar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/admin/request_to_become_instructor" className="block py-2 px-4 hover:bg-blue-600">
+                        <Link to="/admin/instructor-requests" className="block py-2 px-4 hover:bg-blue-600">
                             <Layers className="inline-block mr-2" /> Requests
                         </Link>
                     </li>
@@ -50,12 +50,12 @@ export const SideBar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/logout" className="block py-2  px-4 hover:bg-blue-600">
+                        <Link to="/logout" className="block py-2 px-4 hover:bg-blue-600">
                             <LogOut className="inline-block mr-2" /> Log Out
                         </Link>
                     </li>
                 </ul>
             </nav>
         </div>
-    )
-}
+    );
+};

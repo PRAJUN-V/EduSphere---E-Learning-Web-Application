@@ -5,6 +5,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.conf import settings
 from django.conf.urls.static import static
 from accounts.views import CustomTokenObtainPairView
+from accounts.views import VerifyOTPView, GenerateOTPView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -14,5 +15,7 @@ urlpatterns = [
     path("accounts/api-auth/", include("rest_framework.urls")),
     path('admin_api/', include('admin_api.urls')),
     path('instructor/', include('instructor_api.urls')),
+    path('verify-otp/', VerifyOTPView.as_view(), name='verify-otp'),
+    path('generate-otp/', GenerateOTPView.as_view(), name='generate-otp'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

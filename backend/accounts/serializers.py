@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Profile
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from .models import OTP
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -39,4 +40,10 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['role'] = user.profile.role  # Add role to the token
 
         return token
+
+
+class OTPSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OTP
+        fields = ['email', 'otp', 'created_at']
 

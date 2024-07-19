@@ -17,7 +17,7 @@ export const Header = () => {
                     <li><a href="#" className="text-white hover:text-gray-300">Courses</a></li>
                     <li><a href="#" className="text-white hover:text-gray-300">About</a></li>
                     <li><a href="#" className="text-white hover:text-gray-300">Contact</a></li>
-                    <li><a onClick={handleBecomeAnInstructorClick}  className="text-white cursor-pointer hover:text-gray-300">Become an Instructor</a></li>
+                    {/* <li><a onClick={handleBecomeAnInstructorClick}  className="text-white cursor-pointer hover:text-gray-300">Become an Instructor</a></li> */}
                 </ul>
             </nav>
         </header>
