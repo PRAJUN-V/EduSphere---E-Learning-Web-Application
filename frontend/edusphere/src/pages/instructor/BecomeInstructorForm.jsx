@@ -111,6 +111,7 @@ export const BecomeInstructorForm = () => {
                         className='w-full border rounded px-3 py-2'
                         value={profileDescription}
                         onChange={(e) => setProfileDescription(e.target.value)}
+                        required
                     />
                 </div>
                 <div className='w-full pt-5'>
@@ -145,6 +146,7 @@ export const BecomeInstructorForm = () => {
                             className='w-full border rounded px-3 py-2'
                             value={houseName}
                             onChange={(e) => setHouseName(e.target.value)}
+                            required
                         />
                     </div>
                     <div>
@@ -156,6 +158,7 @@ export const BecomeInstructorForm = () => {
                             className='w-full border rounded px-3 py-2'
                             value={post}
                             onChange={(e) => setPost(e.target.value)}
+                            required
                         />
                     </div>
                 </div>
@@ -169,6 +172,7 @@ export const BecomeInstructorForm = () => {
                             className='w-full border rounded px-3 py-2'
                             value={street}
                             onChange={(e) => setStreet(e.target.value)}
+                            required
                         />
                     </div>
                     <div>
@@ -180,6 +184,7 @@ export const BecomeInstructorForm = () => {
                             className='w-full border rounded px-3 py-2'
                             value={country}
                             onChange={(e) => setCountry(e.target.value)}
+                            required
                         />
                     </div>
                 </div>
@@ -193,6 +198,7 @@ export const BecomeInstructorForm = () => {
                             className='w-full border rounded px-3 py-2'
                             value={state}
                             onChange={(e) => setState(e.target.value)}
+                            required
                         />
                     </div>
                     <div>
@@ -204,6 +210,7 @@ export const BecomeInstructorForm = () => {
                             className='w-full border rounded px-3 py-2'
                             value={district}
                             onChange={(e) => setDistrict(e.target.value)}
+                            required
                         />
                     </div>
                 </div>
@@ -215,6 +222,7 @@ export const BecomeInstructorForm = () => {
                         accept='image/*'
                         className='w-full border rounded px-3 py-2'
                         onChange={(e) => handleFileChange(e, setIdProof)}
+                        required
                     />
                     <p className='text-sm text-gray-500'>Please upload an image file (e.g., .jpg, .png).</p>
                     <p className='text-red-500 text-sm mt-2'>Note: After submission, you will not be able to edit this field.</p>
@@ -227,6 +235,7 @@ export const BecomeInstructorForm = () => {
                         accept='image/*'
                         className='w-full border rounded px-3 py-2'
                         onChange={(e) => handleFileChange(e, setQualificationProof)}
+                        required
                     />
                     <p className='text-sm text-gray-500'>Please upload an image file (e.g., .jpg, .png).</p>
                     <p className='text-red-500 text-sm mt-2'>Note: After submission, you will not be able to edit this field.</p>

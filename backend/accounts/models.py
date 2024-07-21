@@ -14,6 +14,7 @@ class Profile(models.Model):
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
 
+    # these details are related with user as instructor
     profile_description = models.TextField(null=True, blank=True)
     github_link = models.URLField(null=True, blank=True)
     linkedin_link = models.URLField(null=True, blank=True)
@@ -30,6 +31,18 @@ class Profile(models.Model):
     admin_rejected = models.BooleanField(default=False)
     admin_reviewed = models.BooleanField(default=False)
     approval_date = models.DateTimeField(blank=True, null=True)
+
+    # These details are related to user as a student
+    first_login = models.BooleanField(default=True)
+
+    # Interests field
+    interests = models.ManyToManyField('admin_api.Category', blank=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if self.admin_approved and not self.approval_date:
+            self.approval_date = timezone.now()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'Profile of {self.user.username}'

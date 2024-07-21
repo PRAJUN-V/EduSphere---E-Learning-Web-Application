@@ -63,6 +63,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "admin_api",
     "instructor_api",
+    "student_api",
+
 ]
 
 MIDDLEWARE = [
@@ -155,3 +157,11 @@ CORS_ALLOWS_CREDENTIALS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'prajun0604@gmail.com'
+EMAIL_HOST_PASSWORD = 'qqqt ayrz senq esqp'

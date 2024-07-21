@@ -7,7 +7,7 @@ export const SideBar = () => {
     return (
         <div className="bg-blue-500 text-white h-screen w-64 flex flex-col">
             {/* Logo and Name */}
-            <div className="flex items-center justify-center p-4">
+            <div className="flex items-center justify-center ">
                 <img src={logo} alt="Logo" className="h-20 mr-2" />
                 <span className="text-xl font-bold">EduSphere</span>
             </div>

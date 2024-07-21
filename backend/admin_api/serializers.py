@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category
+from .models import Category, SubCategory
 from accounts.models import Profile
 from django.contrib.auth.models import User
 
@@ -21,7 +21,14 @@ class ProfileSerializer(serializers.ModelSerializer):
             'admin_rejected', 'admin_reviewed', 'approval_date'
         ]
 
+class SubCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubCategory
+        fields = ['id', 'category', 'name', 'description', 'active']
+
 class CategorySerializer(serializers.ModelSerializer):
+    subcategories = SubCategorySerializer(many=True, read_only=True)
+
     class Meta:
         model = Category
-        fields = ['id', 'name', 'description', 'active']
+        fields = ['id', 'name', 'description', 'active', 'subcategories']

@@ -15,6 +15,7 @@ urlpatterns = [
     path("accounts/api-auth/", include("rest_framework.urls")),
     path('admin_api/', include('admin_api.urls')),
     path('instructor/', include('instructor_api.urls')),
+    path('student/', include('student_api.urls')),
     path('verify-otp/', VerifyOTPView.as_view(), name='verify-otp'),
     path('generate-otp/', GenerateOTPView.as_view(), name='generate-otp'),
 

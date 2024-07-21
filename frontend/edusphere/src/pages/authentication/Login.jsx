@@ -39,19 +39,34 @@ export const Login = () => {
 
       const decoded = jwtDecode(access);
       const userRole = decoded.role;
-      switch (userRole) {
-        case "admin":
-          navigate("/admin/dashboard");
-          break;
-        case "student":
-          navigate("/");
-          break;
-        case "instructor":
+      const id = decoded.user_id;
+      console.log(id);
+
+      if (userRole === "instructor") {
+        const profileRes = await api.get(`http://127.0.0.1:8000/instructor/profiles/${id}`);
+        const profile = profileRes.data;
+
+        if (!profile.application_submitted) {
           navigate("/instructor/become_instructor");
-          break;
-        default:
-          navigate("/login");
-          break;
+        } else if (profile.application_submitted && !profile.admin_reviewed) {
+          navigate("/instructor/awaiting-approval");
+        } else if (profile.admin_approved) {
+          navigate("/instructor/dashboard"); // what to create it
+        } else if (profile.admin_rejected) {
+          navigate("/instructor/become_instructor");
+        }
+      } else {
+        switch (userRole) {
+          case "admin":
+            navigate("/admin/dashboard");
+            break;
+          case "student":
+            navigate("/");
+            break;
+          default:
+            navigate("/login");
+            break;
+        }
       }
     } catch (error) {
       setErrors({ submit: error.message });
@@ -90,6 +105,7 @@ export const Login = () => {
                     type={showPassword ? "text" : "password"}
                     name="password"
                     placeholder="Password"
+                    autoComplete="new-password"
                     className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 pr-10"
                   />
                   <span

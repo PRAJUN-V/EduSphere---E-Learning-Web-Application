@@ -11,6 +11,9 @@ import { BecomeInstructor } from "./pages/instructor/BecomeInstructor";
 import AwaitingApproval from "./pages/instructor/AwaitingApproval";
 import { EditInstructorApplication } from "./pages/instructor/EditInstructorApplication";
 import { InstructorRequests } from "./pages/admin/InstructorRequests";
+import { InstructorDashboard } from "./pages/instructor/InstructorDashboard";
+import { CategoryList } from "./pages/admin/CategoryList";
+import { InstructorCourses } from "./pages/instructor/InstructorCourses";
 
 
 function Logout() {
@@ -27,12 +30,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* common routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="*" element={<NotFound />}></Route>
 
+        {/* admin routes */}
         <Route path="/admin/dashboard" element={
           <ProtectedRoute requiredRole="admin">
             <AdminDashboard />
@@ -45,6 +50,13 @@ function App() {
           </ProtectedRoute>
         } />
 
+        <Route path="/admin/category_list" element={
+          <ProtectedRoute requiredRole="admin">
+            <CategoryList />
+          </ProtectedRoute>
+        } />
+
+        {/* instructor routes */}
         <Route path="/instructor/become_instructor" element={
           <ProtectedRoute requiredRole="instructor">
             <BecomeInstructor />
@@ -60,6 +72,18 @@ function App() {
         <Route path="/instructor/edit-instructor-application" element={
           <ProtectedRoute requiredRole="instructor">
             <EditInstructorApplication />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/instructor/dashboard" element={
+          <ProtectedRoute requiredRole="instructor">
+            <InstructorDashboard />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/instructor/courses" element={
+          <ProtectedRoute requiredRole="instructor">
+            <InstructorCourses />
           </ProtectedRoute>
         } />
 

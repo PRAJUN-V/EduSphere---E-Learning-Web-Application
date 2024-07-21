@@ -100,3 +100,8 @@ admin side.
 Now I am going to complete otp on registration side.
 
 Instructor application list in admin side is partially completed I need to implement action in it.
+
+Admin password changed,
+Admin@123
+
+There is a small problem in adding interest in student should be corrected.
