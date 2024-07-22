@@ -105,3 +105,5 @@ Admin password changed,
 Admin@123
 
 There is a small problem in adding interest in student should be corrected.
+
+My phone number is not updating in student profile but all other fields are updating I need to look for the error.

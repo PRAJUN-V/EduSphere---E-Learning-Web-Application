@@ -14,7 +14,7 @@ import { InstructorRequests } from "./pages/admin/InstructorRequests";
 import { InstructorDashboard } from "./pages/instructor/InstructorDashboard";
 import { CategoryList } from "./pages/admin/CategoryList";
 import { InstructorCourses } from "./pages/instructor/InstructorCourses";
-
+import { StudentProfile } from "./pages/user/StudentProfile";
 
 function Logout() {
   localStorage.clear()
@@ -84,6 +84,13 @@ function App() {
         <Route path="/instructor/courses" element={
           <ProtectedRoute requiredRole="instructor">
             <InstructorCourses />
+          </ProtectedRoute>
+        } />
+
+        {/* student routes */}
+        <Route path="/student/profile" element={
+          <ProtectedRoute requiredRole="student">
+            <StudentProfile />
           </ProtectedRoute>
         } />
 

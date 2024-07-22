@@ -19,7 +19,7 @@ export const SubHeader = () => {
 
     const handleProfileClick = () => {
         console.log("Navigate to profile");
-        navigate('/profile');
+        navigate('/student/profile');
     };
 
     const handleLogoutClick = () => {
