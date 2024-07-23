@@ -53,7 +53,6 @@ export const Home = () => {
       {isFirstLogin ? (
         <>
           <FirstLoginForm userId={userId} onSubmit={handleFormSubmit} />
-          <Footer />
         </>
       ) : (
         <>

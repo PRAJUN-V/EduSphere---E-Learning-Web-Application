@@ -5,8 +5,10 @@ import * as Yup from "yup";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import api from "../../api";
-import "../../assets/css/Register.css"; // Import your CSS file for additional custom styles
+import "../../assets/css/Register.css";
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const validationSchemaStep1 = Yup.object({
   username: Yup.string()
@@ -29,10 +31,11 @@ const validationSchemaStep1 = Yup.object({
 export const Register = () => {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState(1); // State to manage form steps
-  const [timer, setTimer] = useState(60); // Timer state in seconds
-  const [timerActive, setTimerActive] = useState(false); // Flag to control timer activity
-  const [otpSent, setOtpSent] = useState(false); // Flag to control OTP sent status
+  const [step, setStep] = useState(1);
+  const [timer, setTimer] = useState(60);
+  const [timerActive, setTimerActive] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -62,7 +65,7 @@ export const Register = () => {
         toast.success('OTP sent to your email.');
         setStep(2);
         setOtpSent(true);
-        setTimer(60); // Reset timer to 60 seconds
+        setTimer(60);
         setTimerActive(true);
       }
     } catch (error) {
@@ -74,13 +77,12 @@ export const Register = () => {
   };
 
   const handleVerifyOTP = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     setLoading(true);
     try {
       const res = await api.post('/verify-otp/', { email: formik.values.email, otp });
       if (res.status === 200) {
         toast.success('OTP verified successfully.');
-        // Proceed with registration after OTP verification
         await handleRegister();
       }
     } catch (error) {
@@ -103,7 +105,7 @@ export const Register = () => {
       await api.post("accounts/api/user/register/", userData);
       navigate("/login");
     } catch (error) {
-      toast.error('Registration failed.');
+      toast.error('Registration failed the username already exist.');
       console.error('Registration error:', error);
     } finally {
       setLoading(false);
@@ -112,7 +114,7 @@ export const Register = () => {
 
   const handleResendOTP = async () => {
     if (timer === 0) {
-      await handleSendOTP(formik.values); // Resend OTP
+      await handleSendOTP(formik.values);
     }
   };
 
@@ -147,16 +149,25 @@ export const Register = () => {
             {formik.touched.username && formik.errors.username ? (
               <div className="text-red-500 text-sm">{formik.errors.username}</div>
             ) : null}
-            <input
-              type="password"
-              name="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              placeholder="Password"
-              autoComplete="new-password"
-              className="w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                placeholder="Password"
+                autoComplete="new-password"
+                className="w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-2 top-2 cursor-pointer"
+              >
+                <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+              </button>
+            </div>
             {formik.touched.password && formik.errors.password ? (
               <div className="text-red-500 text-sm">{formik.errors.password}</div>
             ) : null}
@@ -218,7 +229,7 @@ export const Register = () => {
               {!timerActive && otpSent && (
                 <button
                   className="text-blue-500 hover:underline"
-                  type="button" // Ensure this button does not submit the form
+                  type="button"
                   onClick={handleResendOTP}
                 >
                   Resend OTP

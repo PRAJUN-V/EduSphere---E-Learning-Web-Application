@@ -112,7 +112,7 @@ export const Login = () => {
                     className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 cursor-pointer"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                    <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
                   </span>
                 </div>
                 <ErrorMessage
@@ -122,7 +122,7 @@ export const Login = () => {
                 />
               </div>
               {errors.submit && (
-                <div className="text-red-500 text-sm mb-4">{errors.submit}</div>
+                <div className="text-red-500 text-sm mb-4">Incorrect username or password.</div>
               )}
               <button
                 type="submit"
