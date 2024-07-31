@@ -18,5 +18,6 @@ urlpatterns = [
     path('student/', include('student_api.urls')),
     path('verify-otp/', VerifyOTPView.as_view(), name='verify-otp'),
     path('generate-otp/', GenerateOTPView.as_view(), name='generate-otp'),
-
+    path('api/', include('api.urls')),
+    path('payment/', include('payment.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -45,7 +45,7 @@ export const SideBar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/admin/courses" className="block py-2 px-4 hover:bg-blue-600">
+                        <Link to="/admin/course_list" className="block py-2 px-4 hover:bg-blue-600">
                             <Book className="inline-block mr-2" /> Courses
                         </Link>
                     </li>

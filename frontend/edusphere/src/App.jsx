@@ -15,6 +15,11 @@ import { InstructorDashboard } from "./pages/instructor/InstructorDashboard";
 import { CategoryList } from "./pages/admin/CategoryList";
 import { InstructorCourses } from "./pages/instructor/InstructorCourses";
 import { StudentProfile } from "./pages/user/StudentProfile";
+import { InstructorCourseAdd } from "./pages/instructor/courses/InstructorCourseAdd";
+import AdminCourses from "./pages/admin/courses/AdminCourses";
+import CourseDetails from "./pages/admin/courses/CourseDetails";
+import { AllCourses } from "./pages/user/courses/AllCourses";
+import CourseDetail from "./pages/user/courses/CourseDetail";
 
 function Logout() {
   localStorage.clear()
@@ -56,6 +61,18 @@ function App() {
           </ProtectedRoute>
         } />
 
+        <Route path="/admin/course_list" element={
+          <ProtectedRoute requiredRole="admin">
+            <AdminCourses />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/admin/course-details" element={
+          <ProtectedRoute requiredRole="admin">
+            <CourseDetails />
+          </ProtectedRoute>
+        } />
+
         {/* instructor routes */}
         <Route path="/instructor/become_instructor" element={
           <ProtectedRoute requiredRole="instructor">
@@ -87,10 +104,28 @@ function App() {
           </ProtectedRoute>
         } />
 
+        <Route path="/instructor/add-course" element={
+          <ProtectedRoute requiredRole="instructor">
+            <InstructorCourseAdd />
+          </ProtectedRoute>
+        } />
+
         {/* student routes */}
         <Route path="/student/profile" element={
           <ProtectedRoute requiredRole="student">
             <StudentProfile />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/student/all-course" element={
+          <ProtectedRoute requiredRole="student">
+            <AllCourses />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/student/course-detail/:courseId" element={
+          <ProtectedRoute requiredRole="student">
+            <CourseDetail />
           </ProtectedRoute>
         } />
 

@@ -75,6 +75,7 @@ class VerifyOTPView(APIView):
         try:
             otp_instance = OTP.objects.get(email=email, otp=otp)
             if otp_instance.is_valid():
+                otp_instance.delete()
                 return Response({'message': 'OTP is valid'}, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'OTP has expired'}, status=status.HTTP_400_BAD_REQUEST)

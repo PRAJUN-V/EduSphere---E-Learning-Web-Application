@@ -107,3 +107,6 @@ Admin@123
 There is a small problem in adding interest in student should be corrected.
 
 my password change from profile is not working I need to solve it.
+
+I am going to create a app in backend named courses to manage course in backend.
+

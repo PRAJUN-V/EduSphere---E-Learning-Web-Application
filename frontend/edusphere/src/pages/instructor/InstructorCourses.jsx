@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { SideBar } from './common/SideBar';
 import Header from './common/Header';
-import axios from 'axios';
 import api from '../../api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom'; // Import Link for navigation
+import { jwtDecode } from 'jwt-decode'; // Import jwt-decode
 
 export const InstructorCourses = () => {
   const [showSubCategoryForm, setShowSubCategoryForm] = useState(false);
@@ -12,16 +13,28 @@ export const InstructorCourses = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [subCategory, setSubCategory] = useState('');
   const [subCategoryRequest, setSubCategoryRequest] = useState('');
+  const [courses, setCourses] = useState([]); // State to hold courses data
 
   useEffect(() => {
     // Fetch categories from the backend
     api.get('/admin_api/categories/')
       .then(response => {
         setCategories(response.data);
-        console.log(response.data);
       })
       .catch(error => {
         console.error('There was an error fetching the categories!', error);
+      });
+
+    // Fetch courses related to the instructor
+    const token = localStorage.getItem('access');
+    const decodedToken = jwtDecode(token);
+    const instructorId = decodedToken.user_id;
+    api.get(`/api/instructor/${instructorId}/courses/`) // Adjust the endpoint based on your API
+      .then(response => {
+        setCourses(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the courses!', error);
       });
   }, []);
 
@@ -58,16 +71,13 @@ export const InstructorCourses = () => {
 
     api.post(`/admin_api/categories/${selectedCategory}/add_subcategory/`, subCategoryData)
       .then(response => {
-        console.log('Subcategory created:', response.data);
         toast.success('Subcategory submission successful!');
-        // Reset form fields and hide the form
         setSelectedCategory('');
         setSubCategory('');
         setSubCategoryRequest('');
         setShowSubCategoryForm(false);
       })
       .catch(error => {
-        console.error('There was an error creating the subcategory!', error);
         toast.error('Error creating subcategory!');
       });
   };
@@ -77,14 +87,23 @@ export const InstructorCourses = () => {
       <SideBar />
       <div className="flex-grow flex flex-col">
         <Header />
-        <div className="p-6">
-          <h1 className="text-2xl font-bold mb-4">Instructor Courses</h1>
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-            onClick={handleSubCategoryRequest}
-          >
-            Sub Category Request
-          </button>
+        <div className="p-6 flex flex-col">
+          <div className="flex justify-between items-center mb-4">
+            <h1 className="text-2xl font-bold">Instructor Courses</h1>
+            <Link to="/instructor/add-course">
+              <button className="bg-blue-500 text-white px-4 py-2 rounded">
+                Add Course
+              </button>
+            </Link>
+          </div>
+          <div>
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded mb-4 "
+              onClick={handleSubCategoryRequest}
+            >
+              Sub Category Request
+            </button>
+          </div>
           {showSubCategoryForm && (
             <form className="mt-4" onSubmit={handleSubmit}>
               <div className="mb-4">
@@ -117,7 +136,7 @@ export const InstructorCourses = () => {
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Sub Category Descripton
+                  Sub Category Description
                 </label>
                 <input
                   type="text"
@@ -134,6 +153,40 @@ export const InstructorCourses = () => {
               </button>
             </form>
           )}
+          <div className="mt-6">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course Name</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Offer</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {courses.map(course => (
+                  <tr key={course.id}>
+                    <td className="px-6 py-4 whitespace-nowrap">{course.title}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{course.category.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">${course.price}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {course.is_active ? 'Active' : 'Inactive'}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">No</td> {/* Update later with offer logic */}
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <Link to={`/instructor/courses/${course.id}/edit`}>
+                        <button className="bg-yellow-500 text-white px-4 py-1 rounded">
+                          Edit
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
         <ToastContainer />
       </div>
