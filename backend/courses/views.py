@@ -8,6 +8,13 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import CourseStudentSerializer
 from django.contrib.auth.decorators import login_required
+import stripe
+from django.conf import settings
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+import json
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
@@ -73,3 +80,90 @@ def check_purchase_status(request, course_id):
         return Response({'purchased': purchased}, status=status.HTTP_200_OK)
     except Course.DoesNotExist:
         return Response({'message': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
+
+
+stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
+
+@csrf_exempt
+def create_checkout_session(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            course_id = data.get('courseId')
+
+            # Create a Stripe Checkout session
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[
+                    {
+                        'price_data': {
+                            'currency': 'usd',
+                            'product_data': {
+                                'name': 'Course Title',  # Replace with dynamic course title
+                            },
+                            'unit_amount': 2000,  # Replace with dynamic course price in cents
+                        },
+                        'quantity': 1,
+                    },
+                ],
+                mode='payment',
+                success_url=f'http://localhost:5173/student/course-detail/{course_id}?session_id={{CHECKOUT_SESSION_ID}}',
+                cancel_url='http://localhost:3000/cancel',
+            )
+            return JsonResponse({'id': checkout_session.id})
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
+@csrf_exempt
+def webhook(request):
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
+        )
+    except ValueError as e:
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        return HttpResponse(status=400)
+
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        handle_checkout_session(session)
+
+    return HttpResponse(status=200)
+
+def handle_checkout_session(session):
+    course_id = session.get('metadata', {}).get('course_id')
+    if course_id:
+        try:
+            course = Course.objects.get(id=course_id)
+            student = User.objects.get(email=session['customer_email'])
+            Purchase.objects.get_or_create(student=student, course=course)
+        except Exception as e:
+            print(f"Error handling checkout session: {e}")
+
+@csrf_exempt
+def save_course(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            course_id = data.get('courseId')
+            user_id = data.get('userId')
+
+            user = User.objects.get(pk=user_id)
+            course = Course.objects.get(id=course_id)
+
+            # Save purchase status
+            Purchase.objects.get_or_create(student=user, course=course)
+
+            return JsonResponse({'status': 'success'})
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)

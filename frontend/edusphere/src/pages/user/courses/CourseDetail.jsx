@@ -4,15 +4,21 @@ import { Header } from '../common/Header';
 import { SubHeader } from '../common/SubHeader';
 import Footer from '../common/Footer';
 import api from '../../../api';
+import Payment from './Payment';
+import { jwtDecode } from 'jwt-decode'; // Import jwt-decode
 
 const CourseDetail = () => {
     const { courseId } = useParams();
     const navigate = useNavigate();
     const [course, setCourse] = useState(null);
     const [hasPurchased, setHasPurchased] = useState(false);
+    const [userId, setUserId] = useState('')
 
     useEffect(() => {
         // Fetch course details by ID
+        const token = localStorage.getItem('access');
+        const decodedToken = jwtDecode(token);
+        setUserId(decodedToken.user_id);
         api.get(`/api/student-courses/${courseId}`)
             .then(response => {
                 setCourse(response.data);
@@ -34,15 +40,6 @@ const CourseDetail = () => {
         navigate('/student/all-course'); // Adjust the path as needed
     };
 
-    const handlePurchase = async () => {
-        try {
-            await api.post(`/api/purchase/${courseId}/`);
-            setHasPurchased(true);
-        } catch (error) {
-            console.error('Error purchasing course:', error);
-        }
-    };
-
     if (!course) return <div>Loading...</div>;
 
     return (
@@ -51,23 +48,24 @@ const CourseDetail = () => {
             <SubHeader />
             <div className="p-6 bg-gray-100 min-h-screen">
                 <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-                    <div className="relative mx-auto mt-6" style={{ maxWidth: '800px' }}> {/* Added mt-6 for top margin */}
+                    <div className="relative mx-auto mt-6" style={{ maxWidth: '800px' }}>
+                        <h1 className="text-3xl font-bold text-blue-700 mb-4">{course.title}</h1>
                         {hasPurchased ? (
                             <video
                                 controls
                                 className="w-full h-auto object-cover"
-                                style={{ maxHeight: '450px' }} // Adjusted maximum height
+                                style={{ maxHeight: '450px' }}
                             >
                                 <source src={course.course_video} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
                         ) : (
-                            <div className="relative w-full h-0 pb-[56.25%] mb-4"> {/* 16:9 Aspect Ratio */}
+                            <div className="relative w-full h-0 pb-[56.25%] mb-4">
                                 <img
                                     src={course.thumbnail}
                                     alt={course.title}
                                     className="absolute top-0 left-0 w-full h-full object-cover cursor-pointer"
-                                    style={{ height: '100%', width: '100%' }} // Full size within parent div
+                                    style={{ height: '100%', width: '100%' }}
                                 />
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <button className="bg-black bg-opacity-50 p-2 rounded-full">
@@ -86,7 +84,6 @@ const CourseDetail = () => {
                         >
                             Back to Courses
                         </button>
-                        <h1 className="text-3xl font-bold text-blue-700 mb-4">{course.title}</h1>
                         <p className="text-gray-700 mb-2 text-lg font-semibold">{course.category.name}</p>
                         <p className="text-gray-600 mb-2 text-md">{course.subtitle}</p>
                         <p className="text-blue-600 text-xl font-bold mb-4">${course.price}</p>
@@ -97,12 +94,7 @@ const CourseDetail = () => {
                         {/* Purchase Button */}
                         {!hasPurchased && (
                             <div className="text-center mt-6">
-                                <button
-                                    onClick={handlePurchase}
-                                    className="bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300"
-                                >
-                                    Purchase Course
-                                </button>
+                                <Payment courseId={course.id} userId={userId} />
                             </div>
                         )}
                     </div>

@@ -5,7 +5,7 @@ import { Home, Book, Users, Bell, FileText, LogOut } from 'react-feather'; // Im
 
 export const SideBar = () => {
     return (
-        <div className="bg-blue-500 text-white h-screen w-64">
+        <div className="bg-blue-500 text-white h-scree w-64">
             {/* Logo and Name */}
             <div className="flex items-center justify-center">
                 <img src={logo} alt="Logo" className="h-20 mr-2" />

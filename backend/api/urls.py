@@ -3,6 +3,7 @@ from rest_framework.routers import DefaultRouter
 from courses.views import CourseViewSet, InstructorCoursesListView, AdminCoursesListView, toggle_course_activation, AdminCoursesFullDetailView
 from courses.views import CourseStudentDetailView, CourseStudentListCreateView
 from courses.views import purchase_course, check_purchase_status
+from courses.views import create_checkout_session, webhook, save_course
 
 router = DefaultRouter()
 router.register(r'courses', CourseViewSet, basename='course')  # Register with basename
@@ -17,4 +18,7 @@ urlpatterns = [
     path('student-courses/<int:pk>/', CourseStudentDetailView.as_view(), name='course-detail'),
     path('purchase/<int:course_id>/', purchase_course, name='purchase_course'),
     path('check-purchase/<int:course_id>/', check_purchase_status, name='check_purchase_status'),
+    path('create-checkout-session/', create_checkout_session, name='create_checkout_session'),
+    path('webhook/', webhook, name='webhook'),
+    path('save-course/', save_course, name='save-course'),
 ]

@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import { jwtDecode } from 'jwt-decode'; // Import jwt-decode
+import Footer from '../user/common/Footer';
 
 export const InstructorCourses = () => {
   const [showSubCategoryForm, setShowSubCategoryForm] = useState(false);
@@ -83,6 +84,7 @@ export const InstructorCourses = () => {
   };
 
   return (
+    <>
     <div className="flex">
       <SideBar />
       <div className="flex-grow flex flex-col">
@@ -191,5 +193,7 @@ export const InstructorCourses = () => {
         <ToastContainer />
       </div>
     </div>
+    <Footer />
+    </>
   );
 };

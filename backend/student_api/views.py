@@ -30,7 +30,7 @@ def update_user(request, user_id):
 
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_user(request, user_id):
     try:
         user = User.objects.get(id=user_id)
@@ -45,7 +45,7 @@ def get_user(request, user_id):
 
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_student_profile(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
@@ -56,7 +56,7 @@ def get_student_profile(request, user_id):
     return Response(serializer.data)
 
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def create_student_profile(request):
     serializer = StudentProfileSerializer(data=request.data)
     if serializer.is_valid():
@@ -79,7 +79,7 @@ def update_student_profile(request, user_id):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def delete_student_profile(request, user_id):
     try:
         user = User.objects.get(pk=user_id)

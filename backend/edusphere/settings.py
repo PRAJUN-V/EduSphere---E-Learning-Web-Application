@@ -166,3 +166,8 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'prajun0604@gmail.com'
 EMAIL_HOST_PASSWORD = 'qqqt ayrz senq esqp'
+
+# for course purchase
+STRIPE_TEST_PUBLIC_KEY = 'pk_test_51PiRzCDz2cykTF4owBDM3bwW5OZe67vdBh2PfdInSUeo51mwhurKEvSm3RxN4HLuwINZh90cyo8eNJH0SyDSmPzB00qNa2Krge'
+STRIPE_TEST_SECRET_KEY = 'sk_test_51PiRzCDz2cykTF4oqqWgtOqR2Q9gx2YcXQLjKC3km3YzqGSBft631WNzDw6z7Pt7WVNfaxJ1opJvaH4uViGXDohs00V9k8Xix8'
+STRIPE_WEBHOOK_SECRET = 'your-webhook-secret'
