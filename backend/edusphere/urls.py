@@ -5,7 +5,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.conf import settings
 from django.conf.urls.static import static
 from accounts.views import CustomTokenObtainPairView
-from accounts.views import VerifyOTPView, GenerateOTPView
+from accounts.views import VerifyOTPView, GenerateOTPView, ResetPasswordView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -18,6 +18,7 @@ urlpatterns = [
     path('student/', include('student_api.urls')),
     path('verify-otp/', VerifyOTPView.as_view(), name='verify-otp'),
     path('generate-otp/', GenerateOTPView.as_view(), name='generate-otp'),
+    path('reset-password/', ResetPasswordView.as_view(), name='reset-password'),
     path('api/', include('api.urls')),
     path('payment/', include('payment.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

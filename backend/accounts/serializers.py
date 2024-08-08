@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import Profile
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import OTP
+from django.contrib.auth.password_validation import validate_password
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,4 +47,9 @@ class OTPSerializer(serializers.ModelSerializer):
     class Meta:
         model = OTP
         fields = ['email', 'otp', 'created_at']
+
+
+class ResetPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    new_password = serializers.CharField(min_length=8)  # Adjust password validation as needed
 

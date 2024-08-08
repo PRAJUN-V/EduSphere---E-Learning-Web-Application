@@ -14,6 +14,9 @@ from rest_framework.views import APIView
 from rest_framework import status
 from .models import OTP
 from .serializers import OTPSerializer
+from .serializers import ResetPasswordSerializer
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 
 
 class CreateUserView(generics.CreateAPIView):
@@ -81,5 +84,30 @@ class VerifyOTPView(APIView):
                 return Response({'error': 'OTP has expired'}, status=status.HTTP_400_BAD_REQUEST)
         except OTP.DoesNotExist:
             return Response({'error': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
+
+class ResetPasswordView(APIView):
+    authentication_classes = []  # Disable authentication
+    permission_classes = []      # Disable permission
+
+    def post(self, request):
+        serializer = ResetPasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            email = serializer.validated_data.get('email')
+            new_password = serializer.validated_data.get('new_password')
+
+            try:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
+                return Response({"error": "User with this email does not exist."}, status=status.HTTP_404_NOT_FOUND)
+
+            try:
+                # Validate the new password
+                validate_password(new_password, user)
+                user.set_password(new_password)
+                user.save()
+                return Response({"message": "Password has been reset successfully."}, status=status.HTTP_200_OK)
+            except ValidationError as e:
+                return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

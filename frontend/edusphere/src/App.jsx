@@ -20,6 +20,7 @@ import AdminCourses from "./pages/admin/courses/AdminCourses";
 import CourseDetails from "./pages/admin/courses/CourseDetails";
 import { AllCourses } from "./pages/user/courses/AllCourses";
 import CourseDetail from "./pages/user/courses/CourseDetail";
+import ForgotPassword from "./pages/authentication/ForgotPassword";
 
 function Logout() {
   localStorage.clear()
@@ -40,6 +41,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<NotFound />}></Route>
 
         {/* admin routes */}

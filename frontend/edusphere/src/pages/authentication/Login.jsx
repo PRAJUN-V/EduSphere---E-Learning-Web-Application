@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import api from "../../api";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
-import {jwtDecode} from "jwt-decode";
-import "../../assets/css/Login.css"; // Import your CSS file for additional custom styles
+import { jwtDecode } from "jwt-decode";
+// import "../../assets/css/Login.css"; // You can remove this if not needed
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ export const Login = () => {
         } else if (profile.application_submitted && !profile.admin_reviewed) {
           navigate("/instructor/awaiting-approval");
         } else if (profile.admin_approved) {
-          navigate("/instructor/dashboard"); // what to create it
+          navigate("/instructor/dashboard"); // Create this page
         } else if (profile.admin_rejected) {
           navigate("/instructor/become_instructor");
         }
@@ -134,14 +134,21 @@ export const Login = () => {
             </Form>
           )}
         </Formik>
-        <div className="text-center">
-          <Link to="/" className="text-blue-500 hover:underline">
-            Home
-          </Link>
-          {" | "}
-          <Link to="/register" className="text-blue-500 hover:underline">
-            Register
-          </Link>
+        <div className="flex justify-between text-center mt-4">
+          <div>
+            <Link to="/forgot-password" className="text-blue-500 hover:underline">
+              Forgot Password?
+            </Link>
+          </div>
+          <div>
+            <Link to="/" className="text-blue-500 hover:underline">
+              Home
+            </Link>
+            {" | "}
+            <Link to="/register" className="text-blue-500 hover:underline">
+              Register
+            </Link>
+          </div>
         </div>
       </div>
     </div>
