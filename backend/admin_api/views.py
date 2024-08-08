@@ -22,7 +22,6 @@ from rest_framework.permissions import IsAdminUser
 
 class InstructorReviewListView(generics.ListAPIView):
     serializer_class = ProfileSerializer
-    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Profile.objects.filter(
@@ -35,10 +34,8 @@ class InstructorReviewListView(generics.ListAPIView):
 class InstructorReviewDetailView(generics.RetrieveUpdateAPIView):
     queryset = Profile.objects.filter(role='instructor')
     serializer_class = ProfileSerializer
-    permission_classes = [IsAuthenticated]
 
 @api_view(['POST'])
-@permission_classes([IsAdminUser])
 def accept_instructor(request):
     profile_id = request.data.get('instructor_id')
     profile = get_object_or_404(Profile, id=profile_id)
@@ -59,7 +56,6 @@ def accept_instructor(request):
     return JsonResponse({'message': 'Instructor accepted and email sent.'})
 
 @api_view(['POST'])
-@permission_classes([IsAdminUser])
 def reject_instructor(request):
     profile_id = request.data.get('instructor_id')
     reason = request.data.get('reason')

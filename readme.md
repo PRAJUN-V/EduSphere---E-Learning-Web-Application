@@ -117,3 +117,7 @@ Forgot password is implemented.
 my instructor requests is showing not authenticated error, Previously it worked properly I need to debug 
 the error in it. 
 
+by going to git log and I added the previous code it worked. Yaaa hooooo.........
+Instructor request is now working properly
+
+
