@@ -110,3 +110,10 @@ my password change from profile is not working I need to solve it.
 
 I am going to create a app in backend named courses to manage course in backend.
 
+Second week completed... 
+
+Forgot password is implemented.
+
+my instructor requests is showing not authenticated error, Previously it worked properly I need to debug 
+the error in it. 
+
