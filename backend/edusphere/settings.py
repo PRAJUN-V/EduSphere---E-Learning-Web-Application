@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-@4)udtzj42)w3=41vrvxj#oy%js2^-+av_%f&g$cbqxwf8i%4x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", 'http://localhost:8000']
 
 # These settings are related to jwt token ___________
 REST_FRAMEWORK = {
@@ -66,6 +66,15 @@ INSTALLED_APPS = [
     "student_api",
     "courses",
     "payment",
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'dj_rest_auth.registration',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +86,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'edusphere.urls'
@@ -171,3 +181,5 @@ EMAIL_HOST_PASSWORD = 'qqqt ayrz senq esqp'
 STRIPE_TEST_PUBLIC_KEY = 'pk_test_51PiRzCDz2cykTF4owBDM3bwW5OZe67vdBh2PfdInSUeo51mwhurKEvSm3RxN4HLuwINZh90cyo8eNJH0SyDSmPzB00qNa2Krge'
 STRIPE_TEST_SECRET_KEY = 'sk_test_51PiRzCDz2cykTF4oqqWgtOqR2Q9gx2YcXQLjKC3km3YzqGSBft631WNzDw6z7Pt7WVNfaxJ1opJvaH4uViGXDohs00V9k8Xix8'
 STRIPE_WEBHOOK_SECRET = 'your-webhook-secret'
+
+SITE_ID = 1

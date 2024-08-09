@@ -7,7 +7,6 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import api from "../../api";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
 import { jwtDecode } from "jwt-decode";
-// import "../../assets/css/Login.css"; // You can remove this if not needed
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -28,6 +27,12 @@ export const Login = () => {
         "Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, and one number."
       ),
   });
+
+  const reachGoogle = () => {
+    const clientID = "519931391823-ojkmtkp1v1p0dinq0aa6lv02fi4t3925.apps.googleusercontent.com"; // Replace with your actual Client ID
+    const callBackURI = "http://localhost:8000"; // Replace with your actual callback URI
+    window.location.replace(`https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=${callBackURI}&prompt=consent&response_type=code&client_id=${clientID}&scope=openid%20email%20profile&access_type=offline`);
+  };
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
@@ -134,6 +139,12 @@ export const Login = () => {
             </Form>
           )}
         </Formik>
+        <button
+          onClick={reachGoogle}
+          className="w-full p-2 mb-4 text-white bg-red-500 rounded hover:bg-red-600 focus:outline-none"
+        >
+          Login with Google
+        </button>
         <div className="flex justify-between text-center mt-4">
           <div>
             <Link to="/forgot-password" className="text-blue-500 hover:underline">
