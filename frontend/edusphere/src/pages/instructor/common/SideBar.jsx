@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/Logo.png';
-import { Home, Book, Users, Bell, FileText, LogOut } from 'react-feather'; // Import icons from Feather Icons
+import { Home, Book, Users, Bell, FileText, DollarSign, LogOut } from 'react-feather'; // Import icons from Feather Icons
 
 export const SideBar = () => {
     return (
@@ -47,6 +47,11 @@ export const SideBar = () => {
                     <li>
                         <Link to="/instructor/exams" className="block py-2 px-4 hover:bg-blue-600">
                             <FileText className="inline-block mr-2" /> Exams
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/instructor/revenue" className="block py-2 px-4 hover:bg-blue-600">
+                            <DollarSign className="inline-block mr-2" /> Revenue
                         </Link>
                     </li>
                     <li>

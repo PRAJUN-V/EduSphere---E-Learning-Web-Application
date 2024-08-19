@@ -21,6 +21,9 @@ import CourseDetails from "./pages/admin/courses/CourseDetails";
 import { AllCourses } from "./pages/user/courses/AllCourses";
 import CourseDetail from "./pages/user/courses/CourseDetail";
 import ForgotPassword from "./pages/authentication/ForgotPassword";
+import { ChatArea } from "./pages/chat/ChatArea";
+import { InstructorRevenue } from "./pages/instructor/InstructorRevenue";
+import { AdminRevenue } from "./pages/admin/AdminRevenue";
 
 function Logout() {
   localStorage.clear()
@@ -43,6 +46,9 @@ function App() {
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<NotFound />}></Route>
+
+        {/* for checking ui */}
+        <Route path="/chat" element={<ChatArea />}></Route>
 
         {/* admin routes */}
         <Route path="/admin/dashboard" element={
@@ -72,6 +78,12 @@ function App() {
         <Route path="/admin/course-details" element={
           <ProtectedRoute requiredRole="admin">
             <CourseDetails />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/admin/revenue" element={
+          <ProtectedRoute requiredRole="admin">
+            <AdminRevenue />
           </ProtectedRoute>
         } />
 
@@ -109,6 +121,12 @@ function App() {
         <Route path="/instructor/add-course" element={
           <ProtectedRoute requiredRole="instructor">
             <InstructorCourseAdd />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/instructor/revenue" element={
+          <ProtectedRoute requiredRole="instructor">
+            <InstructorRevenue />
           </ProtectedRoute>
         } />
 

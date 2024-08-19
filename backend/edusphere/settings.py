@@ -75,6 +75,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'dj_rest_auth.registration',
+
+    'revenue',
 ]
 
 MIDDLEWARE = [

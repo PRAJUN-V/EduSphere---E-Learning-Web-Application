@@ -121,3 +121,9 @@ by going to git log and I added the previous code it worked. Yaaa hooooo........
 Instructor request is now working properly
 
 My google authentication is not complete there is an issue I need to find it.
+
+I am going to implement chat in my application.
+https://youtu.be/ahyjCfgSHyw?si=-AwIoO-0R7ZHQWwA
+    - pip install channels
+    - pip install channels-redis
+

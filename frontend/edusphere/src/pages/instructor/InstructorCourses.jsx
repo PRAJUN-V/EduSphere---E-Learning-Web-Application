@@ -164,7 +164,7 @@ export const InstructorCourses = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Offer</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                  {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th> */}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -177,13 +177,13 @@ export const InstructorCourses = () => {
                       {course.is_active ? 'Active' : 'Inactive'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">No</td> {/* Update later with offer logic */}
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    {/* <td className="px-6 py-4 whitespace-nowrap">
                       <Link to={`/instructor/courses/${course.id}/edit`}>
                         <button className="bg-yellow-500 text-white px-4 py-1 rounded">
                           Edit
                         </button>
                       </Link>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

@@ -4,6 +4,8 @@ from courses.views import CourseViewSet, InstructorCoursesListView, AdminCourses
 from courses.views import CourseStudentDetailView, CourseStudentListCreateView
 from courses.views import purchase_course, check_purchase_status
 from courses.views import create_checkout_session, webhook, save_course
+from revenue.views import InstructorRevenueView
+from revenue.views import AdminRevenueView
 
 router = DefaultRouter()
 router.register(r'courses', CourseViewSet, basename='course')  # Register with basename
@@ -21,4 +23,6 @@ urlpatterns = [
     path('create-checkout-session/', create_checkout_session, name='create_checkout_session'),
     path('webhook/', webhook, name='webhook'),
     path('save-course/', save_course, name='save-course'),
+    path('instructor/revenue/<int:instructor_id>/', InstructorRevenueView.as_view(), name='instructor-revenue'),
+    path('admin/revenue/', AdminRevenueView.as_view(), name='admin-revenue'),
 ]
