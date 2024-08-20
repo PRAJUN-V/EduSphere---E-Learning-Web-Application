@@ -21,7 +21,6 @@ import CourseDetails from "./pages/admin/courses/CourseDetails";
 import { AllCourses } from "./pages/user/courses/AllCourses";
 import CourseDetail from "./pages/user/courses/CourseDetail";
 import ForgotPassword from "./pages/authentication/ForgotPassword";
-import { ChatArea } from "./pages/chat/ChatArea";
 import { InstructorRevenue } from "./pages/instructor/InstructorRevenue";
 import { AdminRevenue } from "./pages/admin/AdminRevenue";
 
@@ -47,8 +46,6 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<NotFound />}></Route>
 
-        {/* for checking ui */}
-        <Route path="/chat" element={<ChatArea />}></Route>
 
         {/* admin routes */}
         <Route path="/admin/dashboard" element={
