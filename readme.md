@@ -126,3 +126,4 @@ I was not able to do chapter wise course because I need to rebuild the entire co
 
 I deleted the all the implementation of chat in frontend and backend
 
+websocket connection is established for chat

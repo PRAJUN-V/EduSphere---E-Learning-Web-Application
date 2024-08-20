@@ -52,6 +52,8 @@ SIMPLE_JWT = {
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,7 +79,20 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
 
     'revenue',
+
+    'chat',
+    'channels',
+
 ]
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',  # Correct backend path for channels_redis
+        'CONFIG': {
+            'hosts': [('localhost', 6379)],  # Redis host and port
+        },
+    },
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -110,6 +125,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'edusphere.wsgi.application'
+ASGI_APPLICATION = 'edusphere.asgi.application'
 
 
 # Database

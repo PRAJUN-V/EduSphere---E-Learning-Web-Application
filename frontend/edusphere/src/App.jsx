@@ -23,6 +23,7 @@ import CourseDetail from "./pages/user/courses/CourseDetail";
 import ForgotPassword from "./pages/authentication/ForgotPassword";
 import { InstructorRevenue } from "./pages/instructor/InstructorRevenue";
 import { AdminRevenue } from "./pages/admin/AdminRevenue";
+import ChatComponent from "./pages/chat/ChatComponent";
 
 function Logout() {
   localStorage.clear()
@@ -45,6 +46,10 @@ function App() {
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<NotFound />}></Route>
+
+
+        <Route path="/chat/:roomName" element={<ChatComponent />} />
+
 
 
         {/* admin routes */}
