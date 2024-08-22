@@ -61,9 +61,19 @@ export const SubHeader = () => {
                         <button onClick={handleLogoutClick} className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">Logout</button>
                     </>
                 ) : (
+                    // <>
+                    //     <button onClick={handleCreateAccountClick} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Create Account</button>
+                    //     <button onClick={handleSignInClick} className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">Sign In</button>
+                    // </>
+
                     <>
-                        <button onClick={handleCreateAccountClick} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Create Account</button>
-                        <button onClick={handleSignInClick} className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">Sign In</button>
+                        <img
+                            onClick={handleProfileClick}
+                            className="h-16 w-16 rounded-full cursor-pointer"
+                            src={profileImage}
+                            alt="User Profile"
+                        />
+                        <button onClick={handleLogoutClick} className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">Logout</button>
                     </>
                 )}
             </div>
