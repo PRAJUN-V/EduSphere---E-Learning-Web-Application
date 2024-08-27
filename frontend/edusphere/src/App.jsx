@@ -24,8 +24,8 @@ import ForgotPassword from "./pages/authentication/ForgotPassword";
 import { InstructorRevenue } from "./pages/instructor/InstructorRevenue";
 import { AdminRevenue } from "./pages/admin/AdminRevenue";
 import ChatComponent from "./pages/chat/ChatComponent";
-import InstructorList from "./pages/admin/common/InstructorList";
 import { CompleteInstructorList } from "./pages/admin/CompleteInstructorList";
+import { CompleteStudentList } from "./pages/instructor/CompleteStudentList";
 
 function Logout() {
   localStorage.clear()
@@ -137,6 +137,12 @@ function App() {
         <Route path="/instructor/revenue" element={
           <ProtectedRoute requiredRole="instructor">
             <InstructorRevenue />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/instructor/users" element={
+          <ProtectedRoute requiredRole="instructor">
+            <CompleteStudentList/>
           </ProtectedRoute>
         } />
 

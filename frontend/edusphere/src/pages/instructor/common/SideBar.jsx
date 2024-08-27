@@ -36,7 +36,7 @@ export const SideBar = () => {
                     </li>
                     <li>
                         <Link to="/instructor/users" className="block py-2 px-4 hover:bg-blue-600">
-                            <Users className="inline-block mr-2" /> Users
+                            <Users className="inline-block mr-2" /> Students
                         </Link>
                     </li>
                     <li>
