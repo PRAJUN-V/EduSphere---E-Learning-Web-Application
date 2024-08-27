@@ -94,3 +94,11 @@ class SubCategoryViewSet(viewsets.ModelViewSet):
     serializer_class = SubCategorySerializer
     permission_classes = [IsAuthenticated]
 
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+        # Filter for instructors
+        return Profile.objects.filter(role='instructor')
+

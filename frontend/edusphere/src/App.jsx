@@ -24,6 +24,8 @@ import ForgotPassword from "./pages/authentication/ForgotPassword";
 import { InstructorRevenue } from "./pages/instructor/InstructorRevenue";
 import { AdminRevenue } from "./pages/admin/AdminRevenue";
 import ChatComponent from "./pages/chat/ChatComponent";
+import InstructorList from "./pages/admin/common/InstructorList";
+import { CompleteInstructorList } from "./pages/admin/CompleteInstructorList";
 
 function Logout() {
   localStorage.clear()
@@ -86,6 +88,12 @@ function App() {
         <Route path="/admin/revenue" element={
           <ProtectedRoute requiredRole="admin">
             <AdminRevenue />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/admin/instructors" element={
+          <ProtectedRoute requiredRole="admin">
+            <CompleteInstructorList />
           </ProtectedRoute>
         } />
 
