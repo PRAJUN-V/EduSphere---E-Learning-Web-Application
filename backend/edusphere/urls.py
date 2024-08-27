@@ -34,6 +34,8 @@ urlpatterns = [
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
 
+    path('dashboard/', include('dashboard.urls')),
 
+    path('exam/', include('exam.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

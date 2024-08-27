@@ -83,6 +83,9 @@ INSTALLED_APPS = [
     'chat',
     'channels',
 
+    'dashboard',
+
+    'exam',
 ]
 
 CHANNEL_LAYERS = {

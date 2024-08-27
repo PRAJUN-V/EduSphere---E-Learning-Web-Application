@@ -1,7 +1,12 @@
 import teacher from "../../../assets/images/Teacher.jpg"
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+    const navigate = useNavigate();
+    const handleCourseClick = () => {
+        navigate('/student/all-course');
+    };
     return (
         <div className="flex items-center justify-center bg-white">
             <div className="flex flex-col md:flex-row items-center w-full">
@@ -12,7 +17,7 @@ const HeroSection = () => {
                         <p className="text-lg mb-6">
                             Our mission is to help people find the best courses online<br/>and learn with experts anytime, anywhere.
                         </p>
-                        <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-gray-500">
+                        <button onClick={handleCourseClick} className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-gray-500">
                             Courses
                         </button>
                     </div>

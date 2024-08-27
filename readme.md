@@ -131,4 +131,11 @@ websocket connection is established for chat
 4th week task
     - Instructor is listed in the admin side.
     - Student list in instructor side.
+    - Sidebar height is correct.
+
+Created an app in django to manage admin and instructor dashboard
+Created an app in django to manage examination at student and instructor side.
+
+Logo and title name of the application is changed according to our project.
+
     
