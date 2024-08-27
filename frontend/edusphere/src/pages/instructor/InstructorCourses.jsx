@@ -85,7 +85,7 @@ export const InstructorCourses = () => {
 
   return (
     <>
-    <div className="flex">
+    <div className="flex h-screen">
       <SideBar />
       <div className="flex-grow flex flex-col">
         <Header />

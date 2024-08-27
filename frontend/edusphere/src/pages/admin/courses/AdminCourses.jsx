@@ -39,11 +39,11 @@ const AdminCourses = () => {
 
     return (
         <>
-            <div className="flex">
+            <div className="flex h-screen">
                 <SideBar />
                 <div className="flex-grow flex flex-col">
                     <Header />
-                    <div className="p-6">
+                    <div className="p-6 flex-grow">
                         <h1 className="text-2xl font-semibold mb-4">Courses List</h1>
                         <table className="min-w-full bg-white border border-gray-200">
                             <thead>

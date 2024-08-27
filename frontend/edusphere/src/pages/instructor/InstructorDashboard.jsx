@@ -6,11 +6,11 @@ import Footer from '../user/common/Footer';
 export const InstructorDashboard = () => {
   return (
     <>
-      <div className="flex">
+      <div className="flex h-screen">
         <SideBar />
         <div className="flex-grow flex flex-col">
           <Header />
-          <main className="p-4">
+          <main className="p-4 flex-grow ">
             <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
           </main>
         </div>

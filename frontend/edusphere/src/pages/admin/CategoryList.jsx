@@ -132,11 +132,11 @@ export const CategoryList = () => {
     };
 
     return (
-        <div className="flex">
+        <div className="flex h-screen">
             <SideBar />
             <div className="flex-grow flex flex-col">
                 <Header />
-                <div className="p-6">
+                <div className="p-6 flex-grow">
                     <div className="flex justify-between items-center mb-4">
                         <h2 className="text-2xl font-bold">Category List</h2>
                         <Button type="primary" onClick={handleAddCategory}>Add Category</Button>

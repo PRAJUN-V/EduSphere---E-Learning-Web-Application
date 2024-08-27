@@ -44,11 +44,11 @@ export const AdminRevenue = () => {
 
     return (
         <>
-            <div className="flex">
+            <div className="flex h-screen">
                 <SideBar />
                 <div className="flex-grow flex flex-col">
                     <Header />
-                    <div className="p-4">
+                    <div className="p-4 flex-grow">
                         <h2 className="text-2xl font-bold mb-4">Admin Revenue Overview</h2>
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
