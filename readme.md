@@ -150,3 +150,5 @@ In Homepage I added
     - Trusted Companies
 
 Homepage design almost completed
+
+Size of the sidebar is adjust using : flex min-h-screen

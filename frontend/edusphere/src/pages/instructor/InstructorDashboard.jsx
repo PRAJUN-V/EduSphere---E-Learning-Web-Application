@@ -6,7 +6,7 @@ import Footer from '../user/common/Footer';
 export const InstructorDashboard = () => {
   return (
     <>
-      <div className="flex h-screen">
+      <div className="flex min-h-screen">
         <SideBar />
         <div className="flex-grow flex flex-col">
           <Header />

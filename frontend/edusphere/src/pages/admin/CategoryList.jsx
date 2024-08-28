@@ -132,7 +132,7 @@ export const CategoryList = () => {
     };
 
     return (
-        <div className="flex h-screen">
+        <div className="flex min-h-screen">
             <SideBar />
             <div className="flex-grow flex flex-col">
                 <Header />

@@ -35,7 +35,7 @@ const CourseDetails = () => {
     const height = 'calc(100vw / 5)'; // 1/5 of the viewport width
 
     return (
-        <div className="flex">
+        <div className="flex min-h-screen">
             <SideBar />
             <div className="flex-grow flex flex-col">
                 <Header />

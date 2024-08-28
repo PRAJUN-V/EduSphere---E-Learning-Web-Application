@@ -75,7 +75,7 @@ export const InstructorCourseAdd = () => {
     };
 
     return (
-        <div className="flex">
+        <div className="flex min-h-screen">
             <SideBar />
             <div className="flex-grow flex flex-col">
                 <Header />
