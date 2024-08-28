@@ -6,10 +6,16 @@ import Footer from './common/Footer';
 import FirstLoginForm from './common/FirstLoginForm';
 import api from '../../api';
 import { jwtDecode } from 'jwt-decode'; // Correct import
+import CategoriesSection from './common/CategoriesSection';
+import HomeCourseSection from './common/HomeCourseSection';
+import RecentlyAddedCourses from './common/RecentlyAddedCourses';
+import TopInstructors from './common/TopInstructors';
+import TrustedCompanies from './common/TrustedCompanies';
 
 export const Home = () => {
   const [isFirstLogin, setIsFirstLogin] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     // Check if the user is authenticated and if it's their first login
@@ -38,8 +44,19 @@ export const Home = () => {
         }
       }
     };
+    
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/student/home-categories/');
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
 
     checkUserStatus();
+    fetchCategories();
   }, []);
 
   const handleFormSubmit = () => {
@@ -57,6 +74,11 @@ export const Home = () => {
       ) : (
         <>
           <HeroSection />
+          <CategoriesSection categories={categories} /> {/* Pass the categories data */}
+          <HomeCourseSection />
+          <RecentlyAddedCourses />
+          <TopInstructors />
+          <TrustedCompanies />
           <Footer />
         </>
       )}

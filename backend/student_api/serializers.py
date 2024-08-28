@@ -2,6 +2,8 @@ from rest_framework import serializers
 from accounts.models import Profile
 from django.contrib.auth.models import User
 from accounts.models import Profile
+from admin_api.models import Category
+from courses.models import Purchase
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -45,4 +47,28 @@ class StudentProfileSerializer(serializers.ModelSerializer):
             profile.save()
 
         return instance
+
+class HomePageCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['name']  # We are only sending the 'name' field
+
+class TopInstructorSerializer(serializers.ModelSerializer):
+    profile_image = serializers.SerializerMethodField()
+    number_of_students = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'profile_image', 'number_of_students']
+
+    def get_profile_image(self, obj):
+        # Assuming Profile model is connected to User via OneToOneField
+        try:
+            profile = obj.profile
+            return profile.profile_image.url if profile.profile_image else None
+        except Profile.DoesNotExist:
+            return None
+
+    def get_number_of_students(self, obj):
+        return Purchase.objects.filter(course__instructor=obj).count()
 

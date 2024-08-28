@@ -138,4 +138,15 @@ Created an app in django to manage examination at student and instructor side.
 
 Logo and title name of the application is changed according to our project.
 
-    
+I am going to design my homepage.
+
+I am creating the view for home in student_api app.
+
+In Homepage I added
+    - Top Categories
+    - Our Featured Courses
+    - Recently Added Courses
+    - Top3 tutor
+    - Trusted Companies
+
+Homepage design almost completed

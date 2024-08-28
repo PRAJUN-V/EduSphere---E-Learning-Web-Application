@@ -9,6 +9,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import StudentProfileSerializer
+from admin_api.models import Category
+from .serializers import HomePageCategorySerializer, TopInstructorSerializer
+from django.db.models import Count
 
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -89,3 +92,21 @@ def delete_student_profile(request, user_id):
     user.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def category_list_in_homepage(request):
+    categories = Category.objects.filter(active=True)  # Fetch only active categories
+    serializer = HomePageCategorySerializer(categories, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def top_instructors(request):
+    # Aggregate the number of students per instructor
+    instructors = User.objects.filter(courses__purchase__isnull=False) \
+        .annotate(num_students=Count('courses__purchase__student')) \
+        .order_by('-num_students')[:3]  # Get the top 3 instructors
+
+    serializer = TopInstructorSerializer(instructors, many=True)
+    return Response(serializer.data)
