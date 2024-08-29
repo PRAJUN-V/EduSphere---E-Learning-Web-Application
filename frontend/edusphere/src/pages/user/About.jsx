@@ -61,10 +61,10 @@ export const About = () => {
               <img src={logo4} alt="Brand 4" className="h-12" />
             </div>
             <div className="p-4 bg-white shadow-lg rounded-lg w-40 h-20 flex items-center justify-center">
-              <img src={logo5} alt="Brand 4" className="h-12" />
+              <img src={logo5} alt="Brand 5" className="h-12" />
             </div>
             <div className="p-4 bg-white shadow-lg rounded-lg w-40 h-20 flex items-center justify-center">
-              <img src={logo6} alt="Brand 4" className="h-12" />
+              <img src={logo6} alt="Brand 6" className="h-12" />
             </div>
           </div>
         </div>

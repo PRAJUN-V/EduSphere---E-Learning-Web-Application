@@ -156,3 +156,5 @@ Size of the sidebar is adjust using : flex min-h-screen
 Admin Dashboard Completed
 
 About section in homepage completed
+Contact section in homepage completed
+
