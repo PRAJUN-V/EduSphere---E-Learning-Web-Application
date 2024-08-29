@@ -174,7 +174,7 @@ export const InstructorDashboard = () => {
         <div className="flex-grow flex flex-col">
           <Header />
           <main className="p-4 flex-grow">
-            <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
+            <h1 className="text-2xl font-bold mb-4">Overview</h1>
             {loading && <p>Loading...</p>}
             {error && <p className="text-red-500">{error}</p>}
             {stats && (

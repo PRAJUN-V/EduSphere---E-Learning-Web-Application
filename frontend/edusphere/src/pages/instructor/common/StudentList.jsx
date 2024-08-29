@@ -55,7 +55,7 @@ const StudentList = () => {
 
   return (
     <div className="w-full max-w-5xl p-8 bg-white rounded shadow-md">
-      <h1 className="text-2xl font-bold text-blue-500 mb-4">Students Enrolled</h1>
+      <h1 className="text-2xl font-bold text-blue-500 mb-4">Course Enrollment Details</h1>
       <table className="w-full text-left border-collapse">
         <thead>
           <tr>
