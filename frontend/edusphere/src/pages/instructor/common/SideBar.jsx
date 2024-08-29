@@ -26,7 +26,7 @@ export const SideBar = () => {
                 <ul className="space-y-2">
                     <li>
                         <Link to="/instructor/dashboard" className="block py-2 px-4 hover:bg-blue-600">
-                            <Home className="inline-block mr-2" /> Dashboard
+                            <Home className="inline-block mr-2" /> Overview
                         </Link>
                     </li>
                     <li>

@@ -22,3 +22,8 @@ class CourseStatsSerializer(serializers.ModelSerializer):
     def get_total_earnings(self, obj):
         # Multiply the number of purchases by the course price to get total earnings
         return Purchase.objects.filter(course=obj).count() * obj.price
+
+class InstructorStatisticsSerializer(serializers.Serializer):
+    number_of_students = serializers.IntegerField()
+    number_of_enrollments = serializers.IntegerField()
+    total_courses = serializers.IntegerField()

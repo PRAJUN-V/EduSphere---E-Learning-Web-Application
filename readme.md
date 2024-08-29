@@ -158,3 +158,6 @@ Admin Dashboard Completed
 About section in homepage completed
 Contact section in homepage completed
 
+In instructor dashboard implemented chart
+
+
