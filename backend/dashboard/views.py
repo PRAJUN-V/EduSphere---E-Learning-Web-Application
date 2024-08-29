@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
 from decimal import Decimal
 from accounts.models import Profile
-from courses.models import Purchase
-from .serializers import AdminDashboardSerializer
+from courses.models import Purchase, Course
+from .serializers import AdminDashboardSerializer, CourseStatsSerializer
 
 class AdminDashboardView(APIView):
     permission_classes = []
@@ -30,3 +30,9 @@ class AdminDashboardView(APIView):
         serializer = AdminDashboardSerializer(data)
         return Response(serializer.data)
 
+class CourseStatsView(APIView):
+    permission_classes = []
+    def get(self, request):
+        courses = Course.objects.all()
+        serializer = CourseStatsSerializer(courses, many=True)
+        return Response(serializer.data)

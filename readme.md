@@ -152,3 +152,5 @@ In Homepage I added
 Homepage design almost completed
 
 Size of the sidebar is adjust using : flex min-h-screen
+
+Admin Dashboard Completed

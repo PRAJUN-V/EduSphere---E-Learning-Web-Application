@@ -22,7 +22,7 @@ const TopInstructors = () => {
 
     return (
         <div className="p-4 bg-gray-100">
-            <h1 className="text-2xl font-bold text-center mb-6">Top 3 Instructors</h1>
+            <h1 className="text-2xl font-bold text-center mb-6">Top Instructors</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
                 {instructors.map(instructor => (
                     <div key={instructor.id} className="bg-white shadow-md rounded-full p-4 flex flex-col items-center text-center">
