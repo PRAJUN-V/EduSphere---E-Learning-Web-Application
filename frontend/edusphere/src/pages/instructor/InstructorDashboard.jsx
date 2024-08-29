@@ -46,6 +46,7 @@ export const InstructorDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [courseDetails, setCourseDetails] = useState([]);
 
   useEffect(() => {
     const fetchInstructorStats = async () => {
@@ -66,6 +67,16 @@ export const InstructorDashboard = () => {
         }
         const data = await response.json();
         setStats(data);
+
+        // Fetch course details
+        const coursesResponse = await fetch(
+          `http://127.0.0.1:8000/dashboard/instructor-course/${instructorId}/`
+        );
+        if (!coursesResponse.ok) {
+          throw new Error('Failed to fetch course details');
+        }
+        const coursesData = await coursesResponse.json();
+        setCourseDetails(coursesData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -167,7 +178,7 @@ export const InstructorDashboard = () => {
             {loading && <p>Loading...</p>}
             {error && <p className="text-red-500">{error}</p>}
             {stats && (
-              <div className="flex space-x-8">
+              <div className="flex space-x-8 mb-6">
                 <div className="bg-gradient-to-r from-blue-400 to-gray-400 text-white p-6 rounded-lg shadow-lg flex-1 text-center">
                   <h3 className="text-xl font-semibold mb-2">Number of Students</h3>
                   <div className="text-2xl">{stats.number_of_students}</div>
@@ -180,6 +191,29 @@ export const InstructorDashboard = () => {
                   <h3 className="text-xl font-semibold mb-2">Total Courses</h3>
                   <div className="text-2xl">{stats.total_courses}</div>
                 </div>
+              </div>
+            )}
+            {courseDetails.length > 0 && (
+              <div className="mb-6">
+                <h2 className="text-xl font-bold mb-4">Course Details</h2>
+                <table className="min-w-full bg-white border border-gray-300 text-center">
+                  <thead>
+                    <tr className="bg-gray-100 border-b">
+                      <th className="py-2 px-4 border-r">Course Name</th>
+                      <th className="py-2 px-4 border-r">Number of Students</th>
+                      <th className="py-2 px-4 border-r">Revenue</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {courseDetails.map((course) => (
+                      <tr key={course.title}>
+                        <td className="py-2 px-4 border-r">{course.title}</td>
+                        <td className="py-2 px-4 border-r">{course.number_of_students}</td>
+                        <td className="py-2 px-4 border-r">${course.revenue.toFixed(2)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
             <div className="mt-6">

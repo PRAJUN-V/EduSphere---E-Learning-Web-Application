@@ -4,10 +4,11 @@ from rest_framework.permissions import IsAdminUser
 from decimal import Decimal
 from accounts.models import Profile
 from courses.models import Purchase, Course
-from .serializers import AdminDashboardSerializer, CourseStatsSerializer, InstructorStatisticsSerializer
+from .serializers import AdminDashboardSerializer, CourseStatsSerializer, InstructorStatisticsSerializer, CourseSerializer
 from rest_framework import status
 from django.db.models.functions import ExtractDay
 from django.db.models import Count
+from rest_framework import generics
 
 class AdminDashboardView(APIView):
     permission_classes = []
@@ -91,4 +92,9 @@ class EnrollmentDataView(APIView):
 
         return Response(data, status=status.HTTP_200_OK)
 
-
+class InstructorCoursesView(generics.GenericAPIView):
+    permission_classes = []
+    def get(self, request, instructor_id):
+        courses = Course.objects.filter(instructor_id=instructor_id)
+        serializer = CourseSerializer(courses, many=True)
+        return Response(serializer.data)

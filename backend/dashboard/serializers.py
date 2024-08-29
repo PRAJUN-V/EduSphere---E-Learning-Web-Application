@@ -27,3 +27,17 @@ class InstructorStatisticsSerializer(serializers.Serializer):
     number_of_students = serializers.IntegerField()
     number_of_enrollments = serializers.IntegerField()
     total_courses = serializers.IntegerField()
+
+class CourseSerializer(serializers.ModelSerializer):
+    number_of_students = serializers.SerializerMethodField()
+    revenue = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Course
+        fields = ['title', 'subtitle', 'price', 'number_of_students', 'revenue']
+
+    def get_number_of_students(self, obj):
+        return Purchase.objects.filter(course=obj).count()
+
+    def get_revenue(self, obj):
+        return Purchase.objects.filter(course=obj).count() * obj.price

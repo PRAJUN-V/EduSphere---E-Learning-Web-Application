@@ -160,4 +160,4 @@ Contact section in homepage completed
 
 In instructor dashboard implemented chart
 
-
+Instructor dashboard completed
