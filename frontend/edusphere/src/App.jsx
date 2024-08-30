@@ -31,6 +31,8 @@ import { Contact } from "./pages/user/Contact";
 import { InstructorExam } from "./pages/instructor/exam/InstructorExam";
 import InstructorCreateExam from "./pages/instructor/exam/InstructorCreateExam";
 import InstructorExamDetails from "./pages/instructor/exam/InstructorExamDetails";
+import { StudentExam } from "./pages/user/exam/StudentExam";
+import { StudentExamDetails } from "./pages/user/exam/StudentExamDetails";
 
 function Logout() {
   localStorage.clear()
@@ -55,6 +57,7 @@ function App() {
         <Route path="*" element={<NotFound />}></Route>
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/student-exam/:examId/details" element={<StudentExamDetails />} />
 
 
         <Route path="/chat/:roomName" element={<ChatComponent />} />
@@ -189,6 +192,12 @@ function App() {
         <Route path="/student/course-detail/:courseId" element={
           <ProtectedRoute requiredRole="student">
             <CourseDetail />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/student/exam" element={
+          <ProtectedRoute requiredRole="student">
+            <StudentExam />
           </ProtectedRoute>
         } />
 

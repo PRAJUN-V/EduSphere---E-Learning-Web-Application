@@ -86,6 +86,7 @@ INSTALLED_APPS = [
     'dashboard',
 
     'exam',
+    'student_exam',
 ]
 
 CHANNEL_LAYERS = {

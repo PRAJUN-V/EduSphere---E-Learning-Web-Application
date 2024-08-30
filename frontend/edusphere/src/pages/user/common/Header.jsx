@@ -15,6 +15,9 @@ export const Header = () => {
     const handleContactClick = () => {
         navigate('/contact');
     };
+    const handleExamClick = () => {
+        navigate('/student/exam');
+    };
     return (
         <header className="bg-gradient-to-r from-blue-500 to-gray-500 p-4">
             <nav className="flex items-center">
@@ -23,6 +26,7 @@ export const Header = () => {
                     <li><a onClick={handleCourseClick} className="text-white cursor-pointer hover:text-gray-300">Courses</a></li>
                     <li><a onClick={handleAboutClick} className="text-white cursor-pointer hover:text-gray-300">About</a></li>
                     <li><a onClick={handleContactClick} className="text-white cursor-pointer hover:text-gray-300">Contact</a></li>
+                    <li><a onClick={handleExamClick} className="text-white cursor-pointer hover:text-gray-300">Exam</a></li>
                     {/* <li><a onClick={handleBecomeAnInstructorClick}  className="text-white cursor-pointer hover:text-gray-300">Become an Instructor</a></li> */}
                 </ul>
             </nav>
