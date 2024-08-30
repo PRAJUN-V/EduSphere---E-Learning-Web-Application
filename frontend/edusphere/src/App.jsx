@@ -28,6 +28,9 @@ import { CompleteInstructorList } from "./pages/admin/CompleteInstructorList";
 import { CompleteStudentList } from "./pages/instructor/CompleteStudentList";
 import { About } from "./pages/user/About";
 import { Contact } from "./pages/user/Contact";
+import { InstructorExam } from "./pages/instructor/exam/InstructorExam";
+import InstructorCreateExam from "./pages/instructor/exam/InstructorCreateExam";
+import InstructorExamDetails from "./pages/instructor/exam/InstructorExamDetails";
 
 function Logout() {
   localStorage.clear()
@@ -149,6 +152,26 @@ function App() {
             <CompleteStudentList />
           </ProtectedRoute>
         } />
+
+        <Route path="/instructor/exams" element={
+          <ProtectedRoute requiredRole="instructor">
+            <InstructorExam />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/instructor/create-exam" element={
+          <ProtectedRoute requiredRole="instructor">
+            <InstructorCreateExam />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/instructor/instructor-exam-details/:examId" element={
+          <ProtectedRoute requiredRole="instructor">
+            <InstructorExamDetails />
+          </ProtectedRoute>
+        } />
+
+
 
         {/* student routes */}
         <Route path="/student/profile" element={

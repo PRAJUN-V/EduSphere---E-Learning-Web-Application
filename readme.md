@@ -164,3 +164,4 @@ Instructor dashboard completed
 
 created two folders named exam in user and instructor side for managing exam in frontend
 
+exam in tutor side is completed
