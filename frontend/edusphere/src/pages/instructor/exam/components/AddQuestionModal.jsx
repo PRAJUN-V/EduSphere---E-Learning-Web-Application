@@ -90,7 +90,7 @@ const AddQuestionModal = ({ examId, onClose }) => {
                                     name="optionText"
                                     value={option.optionText}
                                     onChange={(e) => handleOptionChange(index, e)}
-                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                    className="mt-1 h-10 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 />
                                 <label className="flex items-center space-x-2">
                                     <input
