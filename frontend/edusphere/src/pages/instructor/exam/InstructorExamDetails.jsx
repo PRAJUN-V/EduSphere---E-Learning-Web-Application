@@ -43,18 +43,18 @@ const InstructorExamDetails = () => {
                 <div className="flex-grow flex flex-col">
                     <Header />
                     <main className="relative p-4 flex flex-col">
-                        <h1 className="text-2xl font-bold mb-4">Exam Details</h1>
+                        <h1 className="text-2xl font-bold">Exam Details</h1>
                         <button
                             onClick={handleAddQuestion}
-                            className="absolute top-4 right-4 bg-blue-500 text-white py-2 px-4 rounded"
+                            className="absolute  right-4 bg-blue-500 text-white py-2 px-4 rounded"
                         >
                             Add Question
                         </button>
                         <div className="space-y-4 mt-12">
                             <p><strong>Exam ID:</strong> {exam.id}</p>
-                            <p><strong>Title:</strong> {exam.title}</p>
-                            <p><strong>Course:</strong> {exam.course_title}</p>
-                            <p><strong>Instructor:</strong> {exam.instructor_name}</p>
+                            <p><strong>Exam Name:</strong> {exam.title}</p>
+                            {/* <p><strong>Course:</strong> {exam.course_title}</p>
+                            <p><strong>Instructor:</strong> {exam.instructor_name}</p> */}
                             <p><strong>Status:</strong> {exam.is_active ? 'Active' : 'Inactive'}</p>
                             <p><strong>Created At:</strong> {new Date(exam.created_at).toLocaleString()}</p>
                         </div>
