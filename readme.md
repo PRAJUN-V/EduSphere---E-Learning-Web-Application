@@ -161,3 +161,6 @@ Contact section in homepage completed
 In instructor dashboard implemented chart
 
 Instructor dashboard completed
+
+created two folders named exam in user and instructor side for managing exam in frontend
+
