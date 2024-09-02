@@ -33,6 +33,8 @@ import InstructorCreateExam from "./pages/instructor/exam/InstructorCreateExam";
 import InstructorExamDetails from "./pages/instructor/exam/InstructorExamDetails";
 import { StudentExam } from "./pages/user/exam/StudentExam";
 import { StudentExamDetails } from "./pages/user/exam/StudentExamDetails";
+import { InstructorChatroom } from "./pages/instructor/InstructorChatroom";
+import { Chat } from "./pages/user/discussion/Chat";
 
 function Logout() {
   localStorage.clear()
@@ -174,6 +176,12 @@ function App() {
           </ProtectedRoute>
         } />
 
+        <Route path="/instructor/chat-room" element={
+          <ProtectedRoute requiredRole="instructor">
+            <InstructorChatroom />
+          </ProtectedRoute>
+        } />
+
 
 
         {/* student routes */}
@@ -198,6 +206,12 @@ function App() {
         <Route path="/student/exam" element={
           <ProtectedRoute requiredRole="student">
             <StudentExam />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/student/discussion" element={
+          <ProtectedRoute requiredRole="student">
+            <Chat/>
           </ProtectedRoute>
         } />
 

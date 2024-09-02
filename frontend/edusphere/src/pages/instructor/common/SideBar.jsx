@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/Logo.png';
-import { Home, Book, Users, Bell, FileText, DollarSign, LogOut } from 'react-feather'; // Import icons from Feather Icons
+import { Home, Book, Users, FileText, DollarSign, LogOut, MessageCircle } from 'react-feather'; // Import icons from Feather Icons
 
 export const SideBar = () => {
     return (
@@ -40,8 +40,8 @@ export const SideBar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/instructor/notifications" className="block py-2 px-4 hover:bg-blue-600">
-                            <Bell className="inline-block mr-2" /> Notifications
+                        <Link to="/instructor/chat-room" className="block py-2 px-4 hover:bg-blue-600">
+                            <MessageCircle className="inline-block mr-2" /> Chat Rooms
                         </Link>
                     </li>
                     <li>

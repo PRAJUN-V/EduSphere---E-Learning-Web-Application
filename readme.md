@@ -165,3 +165,14 @@ Instructor dashboard completed
 created two folders named exam in user and instructor side for managing exam in frontend
 
 exam is completed
+
+Now we can implement chat in our project
+
+for that I am creating a model for chatroom in chat app.
+
+creating a signal in chat to automatically create the chatroom related to that course when course is created.
+
+notification in sidebar of instructor is change to chatroom for implementing chat in instructor side.
+
+chat listing in instructor side and student side completed
+

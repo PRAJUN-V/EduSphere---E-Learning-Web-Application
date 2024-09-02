@@ -37,6 +37,8 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
 
     path('exam/', include('exam.urls')),
-    path('student-exam/', include('student_exam.urls'))
+    path('student-exam/', include('student_exam.urls')),
+
+    path('chat/', include('chat.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
