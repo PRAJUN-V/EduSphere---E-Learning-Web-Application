@@ -195,3 +195,4 @@ I created an app named chat2 to implement chat in other way like admin create ro
 
 Creating chatroom , listing of chatroom and deleting the chatroom in admin side is implemented.
 
+Implement chat in student side and instrutor side in a way that rooms and messages will show in it realtime chattin is not implemented yet.
