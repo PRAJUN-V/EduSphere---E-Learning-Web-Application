@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SubHeader } from '../common/SubHeader';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
@@ -11,17 +11,17 @@ export const Chat = () => {
     const [newMessage, setNewMessage] = useState('');
     const [selectedRoomId, setSelectedRoomId] = useState(null);
     const [userId, setUserId] = useState(null);
+    const [webSocket, setWebSocket] = useState(null);
+    const wsRef = useRef(null);
 
-    // Decode the JWT token to get the user ID
     useEffect(() => {
         const token = localStorage.getItem('access');
         if (token) {
             const decodedToken = jwtDecode(token);
-            setUserId(decodedToken.user_id); // Assuming the JWT contains `user_id`
+            setUserId(decodedToken.user_id);
         }
     }, []);
 
-    // Fetch chat rooms
     useEffect(() => {
         fetchRooms();
     }, []);
@@ -35,7 +35,6 @@ export const Chat = () => {
         }
     };
 
-    // Fetch messages from the selected chat room
     const fetchMessages = async (roomId) => {
         try {
             const response = await axios.get(`http://127.0.0.1:8000/chat2/rooms/${roomId}/messages/`);
@@ -45,13 +44,40 @@ export const Chat = () => {
         }
     };
 
-    // Handle selecting a room
     const handleRoomClick = (roomId) => {
         setSelectedRoomId(roomId);
         fetchMessages(roomId);
+        connectToWebSocket(roomId);
     };
 
-    // Render the chat message
+    const connectToWebSocket = (roomId) => {
+        if (wsRef.current) {
+            wsRef.current.close();
+        }
+
+        const socket = new WebSocket(`ws://127.0.0.1:8000/ws/messages/${roomId}/`);
+        wsRef.current = socket;
+        setWebSocket(socket);
+
+        socket.onopen = () => {
+            console.log('WebSocket connection opened');
+        };
+
+        socket.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            const newMessage = data.message;
+            setMessages((prevMessages) => [...prevMessages, newMessage]);
+        };
+
+        socket.onclose = () => {
+            console.log('WebSocket connection closed');
+        };
+
+        socket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+    };
+
     const renderMessage = (message, index) => {
         const isUserMessage = message.sender_id === userId;
         const messageClass = isUserMessage ? 'text-right' : 'text-left';
@@ -60,22 +86,29 @@ export const Chat = () => {
         return (
             <div key={index} className={`p-2 mb-2 ${messageClass}`}>
                 <div className={`inline-block p-2 rounded ${containerClass}`}>
-                    <p className="font-bold">{isUserMessage ? 'You' : `${message.sender_name}`}</p>
+                    <p className="font-bold">{isUserMessage ? 'You' : message.sender_name || 'Unknown'}</p>
                     <p>{message.message}</p>
                 </div>
             </div>
         );
     };
 
-    // Handle new message input
     const handleInputChange = (e) => {
         setNewMessage(e.target.value);
     };
 
-    // Dummy function to handle sending a message (to be implemented later)
     const handleSendMessage = () => {
-        // Functionality to send the message will be implemented here
-        console.log('Send message:', newMessage);
+        if (newMessage.trim() === '' || !webSocket || webSocket.readyState !== WebSocket.OPEN) {
+            return;
+        }
+
+        const messageData = {
+            sender_id: userId,
+            message: newMessage,
+            room_name: selectedRoomId,
+        };
+
+        webSocket.send(JSON.stringify(messageData));
         setNewMessage('');
     };
 
@@ -85,7 +118,6 @@ export const Chat = () => {
             <div className="flex min-h-screen">
                 <div className="flex-grow flex flex-col">
                     <Header />
-                    <SubHeader/>
                     <div className="p-4 flex-grow flex">
                         {/* Chat Rooms List */}
                         <div className="w-1/4 bg-gray-200 p-4">
