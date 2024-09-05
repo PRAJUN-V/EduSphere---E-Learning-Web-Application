@@ -118,6 +118,7 @@ export const Chat = () => {
             <div className="flex min-h-screen">
                 <div className="flex-grow flex flex-col">
                     <Header />
+                    <SubHeader />
                     <div className="p-4 flex-grow flex">
                         {/* Chat Rooms List */}
                         <div className="w-1/4 bg-gray-200 p-4">
