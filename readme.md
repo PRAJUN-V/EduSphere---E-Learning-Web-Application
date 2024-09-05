@@ -176,3 +176,22 @@ notification in sidebar of instructor is change to chatroom for implementing cha
 
 chat listing in instructor side and student side completed
 
+4 steps to implement django channels and websockent connection in django
+    - Configuring ASGI
+    - consumers
+    - routing
+    - websocket api in frontend to create handshake
+
+Created a model named Chat in chat app for saving the messages.
+
+Get idea about what is websocket : https://esketchers.com/django-websockets-a-complete-beginners-guide/#:~:text=To%20create%20a%20WebSocket%20application,for%20the%20connection%20in%20it.
+
+
+Today I am follow https://www.youtube.com/watch?v=mhADNEyMBis this to implement chat in my project.
+
+I am going to create another chat app to implement chat named chat2
+
+I created an app named chat2 to implement chat in other way like admin create room and tutor and students can join in it.
+
+Creating chatroom , listing of chatroom and deleting the chatroom in admin side is implemented.
+

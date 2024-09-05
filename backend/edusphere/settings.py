@@ -87,6 +87,8 @@ INSTALLED_APPS = [
 
     'exam',
     'student_exam',
+
+    'chat2',
 ]
 
 CHANNEL_LAYERS = {

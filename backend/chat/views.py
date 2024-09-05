@@ -1,11 +1,13 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Chatroom
+from .models import Chatroom, Chat
 from .serializers import ChatroomSerializer
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
+from rest_framework import generics
+
 @api_view(['GET'])
 def instructor_chatrooms(request, instructor_id):
     # Get the instructor (User object)
@@ -31,3 +33,12 @@ class StudentChatroomsView(APIView):
             return Response(serializer.data)
         except User.DoesNotExist:
             return Response({"error": "Student not found"}, status=404)
+
+# --------------------------------------------------------------------------------------
+# class ChatListView(generics.ListAPIView):
+#     serializer_class = ChatSerializer
+#
+#     def get_queryset(self):
+#         chatroom_id = self.kwargs.get('room_id')
+#
+#         return Chat.objects.filter(chatroom_id=chatroom_id).order_by('id')

@@ -35,6 +35,7 @@ import { StudentExam } from "./pages/user/exam/StudentExam";
 import { StudentExamDetails } from "./pages/user/exam/StudentExamDetails";
 import { InstructorChatroom } from "./pages/instructor/InstructorChatroom";
 import { Chat } from "./pages/user/discussion/Chat";
+import { AdminChat } from "./pages/admin/AdminChat";
 
 function Logout() {
   localStorage.clear()
@@ -106,6 +107,12 @@ function App() {
         <Route path="/admin/instructors" element={
           <ProtectedRoute requiredRole="admin">
             <CompleteInstructorList />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/admin/chat" element={
+          <ProtectedRoute requiredRole="admin">
+            <AdminChat />
           </ProtectedRoute>
         } />
 
@@ -211,7 +218,7 @@ function App() {
 
         <Route path="/student/discussion" element={
           <ProtectedRoute requiredRole="student">
-            <Chat/>
+            <Chat />
           </ProtectedRoute>
         } />
 
